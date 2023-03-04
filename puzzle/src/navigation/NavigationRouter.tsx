@@ -6,6 +6,7 @@ export enum MobileRoutes {
   LANDING = 'LANDING',
   PUZZLE = 'PUZZLE',
   RESULT = 'RESULT',
+  LEADERSBOARD = 'LEADERSBOARD',
 }
 
 export type AllMobileRoutes = keyof MobileRoutesParamsList;
@@ -16,6 +17,7 @@ export type MobileMainRoutesParamsList = {
   [MobileRoutes.LANDING]?: IScreenRouteParams;
   [MobileRoutes.PUZZLE]?: IScreenRouteParams;
   [MobileRoutes.RESULT]?: IScreenRouteParams;
+  [MobileRoutes.LEADERSBOARD]?: IScreenRouteParams;
 };
 
 export const ALL_MOBILE_ROUTES = {

@@ -1,12 +1,15 @@
 import React, {FC} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import LandingScreen from '../screens/Landing';
-import PuzzleScreen from '../screens/Puzzle';
-import ResultScreen from '../screens/Result';
+
 import {
   ALL_MOBILE_ROUTES,
   MobileMainRoutesParamsList,
 } from './NavigationRouter';
+
+import LandingScreen from '../screens/Landing';
+import PuzzleScreen from '../screens/Puzzle';
+import ResultScreen from '../screens/Result';
+import LeadersBoardScreen from '../screens/LeadersBoard';
 
 interface IProps {}
 
@@ -30,6 +33,10 @@ const MainNavigation: FC<IProps> = () => {
       <ScreensStack.Screen
         name={ALL_MOBILE_ROUTES.MAIN.RESULT}
         component={ResultScreen}
+      />
+      <ScreensStack.Screen
+        name={ALL_MOBILE_ROUTES.MAIN.LEADERSBOARD}
+        component={LeadersBoardScreen}
       />
     </ScreensStack.Navigator>
   );

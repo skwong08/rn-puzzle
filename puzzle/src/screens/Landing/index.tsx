@@ -18,15 +18,17 @@ enum ECategory {
 const LandingScreen: FC<IProps> = () => {
   const [category, setCategory] = useState<ECategory>(ECategory.NOT_SELECTED);
 
-  const startGame = () => {
-    navigate(ALL_MOBILE_ROUTES.MAIN.PUZZLE);
-  };
-
   const selectedCategory = (c: ECategory) => {
     setCategory(c);
   };
 
-  console.log('category = ', category);
+  const startGame = () => {
+    navigate(ALL_MOBILE_ROUTES.MAIN.PUZZLE);
+  };
+
+  const goLeadersBoard = () => {
+    navigate(ALL_MOBILE_ROUTES.MAIN.LEADERSBOARD);
+  };
 
   return (
     <Container>
@@ -49,7 +51,7 @@ const LandingScreen: FC<IProps> = () => {
         </CategoryButton>
       </Buttons>
       <Button onPress={startGame}>Start Playing</Button>
-      <Button onPress={startGame} transparent>
+      <Button onPress={goLeadersBoard} transparent>
         Leaders board
       </Button>
     </Container>

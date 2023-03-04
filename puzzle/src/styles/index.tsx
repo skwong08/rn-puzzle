@@ -19,9 +19,18 @@ export const HeaderText = styled.Text`
   align-self: center;
 `;
 
+export const PointsText = styled.Text`
+  color: gray;
+  font-size: 40px;
+  font-weight: 500;
+
+  margin-bottom: 20px;
+  align-self: center;
+`;
+
 export const OptionButton = styled.TouchableOpacity<{selected?: boolean}>`
-  height: 50px;
-  margin-top: 16px;
+  padding: 20px;
+  margin-top: 24px;
 
   align-items: center;
   justify-content: center;
@@ -35,15 +44,14 @@ export const OptionButton = styled.TouchableOpacity<{selected?: boolean}>`
 
 export const OptionButtonText = styled.Text<{selected?: boolean}>`
   color: ${({selected}) => (selected ? 'red' : 'black')};
-  font-size: 15px;
+  font-size: 20px;
   font-weight: ${({selected}) => (selected ? '700' : '400')};
 
   flex-direction: column;
 `;
 
 export const BaseButton = styled.TouchableOpacity<{transparent?: boolean}>`
-  height: 50px;
-  margin-top: 20px;
+  padding: 20px;
 
   align-items: center;
   justify-content: center;
@@ -55,7 +63,7 @@ export const BaseButton = styled.TouchableOpacity<{transparent?: boolean}>`
 
 export const BaseButtonText = styled.Text`
   color: black;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 500;
 
   flex-direction: column;
