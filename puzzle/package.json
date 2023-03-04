@@ -11,21 +11,40 @@
     "start:clean": "react-native start --reset-cache",
     "clean:android": "cd android && rm -rf app/build/ && ./gradlew clean && cd ..",
     "start:android": "func() { react-native run-android --variant=debug; }; func",
+    "ios:pods": "cd ios && pod install && cd ..",
     "start:ios": "func() { react-native run-ios --scheme 'puzzle' --simulator='iPhone 14 Pro Max'; }; func"
   },
   "dependencies": {
-    "react": "17.0.2",
-    "react-native": "0.66.5"
+    "@react-navigation/native": "~6.0.6",
+    "@react-navigation/stack": "~6.0.11",
+    "native-base": "~2.15.2",
+    "prettier": "2.2.1",
+    "react": "~17.0.2",
+    "react-dom": "17.0.2",
+    "react-native": "~0.66.5",
+    "react-native-gesture-handler": "^1.10.3",
+    "react-native-safe-area-context": "~3.3.2",
+    "react-native-screens": "~3.9.0",
+    "styled-components": "5.2.3",
+    "typescript": "4.8.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^2.0.0",
+    "@types/node": "16.11.43",
+    "@types/react": "17.0.2",
+    "@types/react-native": "0.66.2",
+    "@types/styled-components": "5.1.14",
+    "@types/styled-components-react-native": "5.1.1",
     "babel-jest": "^26.6.3",
     "eslint": "7.14.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "^0.66.2",
     "react-test-renderer": "17.0.2"
+  },
+  "resolutions": {
+    "@types/react": "^17"
   },
   "jest": {
     "preset": "react-native"
