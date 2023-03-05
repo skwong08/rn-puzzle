@@ -9,7 +9,7 @@ import {
 import LandingScreen from '../screens/Landing';
 import PuzzleScreen from '../screens/Puzzle';
 import ResultScreen from '../screens/Result';
-import LeadersBoardScreen from '../screens/LeadersBoard';
+import LeaderboardScreen from '../screens/Leaderboard';
 
 interface IProps {}
 
@@ -35,8 +35,8 @@ const MainNavigation: FC<IProps> = () => {
         component={ResultScreen}
       />
       <ScreensStack.Screen
-        name={ALL_MOBILE_ROUTES.MAIN.LEADERSBOARD}
-        component={LeadersBoardScreen}
+        name={ALL_MOBILE_ROUTES.MAIN.LEADERBOARD}
+        component={LeaderboardScreen}
       />
     </ScreensStack.Navigator>
   );

@@ -3,6 +3,8 @@ import {CommonActions} from '@react-navigation/native';
 import styled from 'styled-components/native';
 
 import {puzzleService, usePuzzle} from '../../core/puzzle';
+import {useResult} from '../../core/result';
+
 import Button from '../../components/Button';
 import {ALL_MOBILE_ROUTES} from '../../navigation/NavigationRouter';
 import {navigationRef} from '../../navigation/NavigationUtil';
@@ -12,7 +14,7 @@ interface IProps {}
 
 const ResultScreen: FC<IProps> = () => {
   const {correct} = usePuzzle();
-  console.log('correct = ', correct);
+  const {result} = useResult();
 
   const finish = () => {
     puzzleService.reset();
@@ -31,7 +33,7 @@ const ResultScreen: FC<IProps> = () => {
         {correct > 0 ? (
           <>
             <HeaderText>Congratulations!</HeaderText>
-            <PointsText>You earn {correct * 10} points!</PointsText>
+            <PointsText>You earn {result} points!</PointsText>
           </>
         ) : (
           <>

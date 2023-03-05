@@ -58,15 +58,18 @@ export const OptionButtonText = styled.Text<{selected?: boolean}>`
   flex-direction: column;
 `;
 
-export const BaseButton = styled.TouchableOpacity<{transparent?: boolean}>`
+export const BaseButton = styled.TouchableOpacity<{
+  color: string;
+  transparent?: boolean;
+}>`
   padding: 20px;
 
   align-items: center;
   justify-content: center;
 
   border-radius: 4px;
-  background-color: ${({transparent}) =>
-    transparent ? 'transparent' : 'pink'};
+  background-color: ${({transparent, color}) =>
+    transparent ? 'transparent' : color};
 `;
 
 export const BaseButtonText = styled.Text`

@@ -4,11 +4,12 @@ import {GestureResponderEvent, TouchableOpacityProps} from 'react-native';
 import {BaseButton, BaseButtonText} from '../styles';
 
 interface IProps extends TouchableOpacityProps {
+  color?: string;
   transparent?: boolean;
 }
 
 const Button: FC<IProps> = props => {
-  const {children, transparent, onPress} = props;
+  const {children, color, transparent, onPress} = props;
 
   const onPressButton = useCallback(
     (event: GestureResponderEvent) => {
@@ -18,7 +19,10 @@ const Button: FC<IProps> = props => {
   );
 
   return (
-    <BaseButton onPress={onPressButton} transparent={transparent}>
+    <BaseButton
+      onPress={onPressButton}
+      color={color || 'pink'}
+      transparent={transparent}>
       <BaseButtonText>{children}</BaseButtonText>
     </BaseButton>
   );

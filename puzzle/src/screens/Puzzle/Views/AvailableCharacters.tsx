@@ -1,28 +1,40 @@
-import React, {FC, useMemo} from 'react';
+import React, {FC, useCallback, useMemo} from 'react';
 import styled from 'styled-components/native';
 
-import {usePuzzle} from '../../core/puzzle';
+import {usePuzzle} from '../../../core/puzzle';
 import TextBoxRandom from './TextBoxRandom';
 
 interface IProps {
-  numberOfWords: number;
+  randomText: string[];
+  onPress: (string, number, boolean) => void;
 }
 
-const AnswerCharacters: FC<IProps> = props => {
-  const {numberOfWords} = props;
+const AvailableCharacters: FC<IProps> = props => {
+  const {randomText, onPress} = props;
 
-  const {userAnswer} = usePuzzle();
+  const {firstRowIndex, secondRowIndex} = usePuzzle();
 
-  const buildAnswerTextBox = useMemo(() => {
-    if (numberOfWords < 6) {
+  const handleOnPress = useCallback(
+    (char: string, i: number, firstRow: boolean) => {
+      onPress(char, i, firstRow);
+    },
+    [onPress],
+  );
+
+  const buildRandomTextBox = useMemo(() => {
+    if (randomText.length < 6) {
       const firstRow: any[] = [];
 
-      for (let i = 0; i < numberOfWords; i++) {
-        const char = userAnswer[i];
+      randomText.map((char: string, i: number) => {
         firstRow.push(
-          <TextBoxRandom key={`${char}_${i}_display`} character={char} />,
+          <TextBoxRandom
+            key={`${char}_${i}_selectable`}
+            character={char}
+            onPress={() => handleOnPress(char, i + 1, true)}
+            disabled={!!firstRowIndex.find(index => index === i + 1)}
+          />,
         );
-      }
+      });
 
       return (
         <BoxContainerRow>
@@ -38,22 +50,24 @@ const AnswerCharacters: FC<IProps> = props => {
       const secondRow: any[] = [];
 
       for (let i = 0; i < 5; i++) {
-        const char = userAnswer[i];
+        const char = randomText[i];
         firstRow.push(
           <TextBoxRandom
-            key={`${char}_${i}_display`}
+            key={`${char}_${i}_selectable`}
             character={char}
-            isDisplay
+            onPress={() => handleOnPress(char, i + 1, true)}
+            disabled={!!firstRowIndex.find(index => index === i + 1)}
           />,
         );
       }
-      for (let i = 5; i < numberOfWords; i++) {
-        const char = userAnswer[i];
+      for (let i = 5; i < randomText.length; i++) {
+        const char = randomText[i];
         secondRow.push(
           <TextBoxRandom
-            key={`${char}_${i}_display`}
+            key={`${char}_${i}_selectable`}
             character={char}
-            isDisplay
+            onPress={() => handleOnPress(char, i + 1, false)}
+            disabled={!!secondRowIndex.find(index => index === i + 1)}
           />,
         );
       }
@@ -75,12 +89,12 @@ const AnswerCharacters: FC<IProps> = props => {
         </>
       );
     }
-  }, [numberOfWords, userAnswer]);
+  }, [firstRowIndex, secondRowIndex, randomText, handleOnPress]);
 
-  return <Content>{buildAnswerTextBox}</Content>;
+  return <Content>{buildRandomTextBox}</Content>;
 };
 
-export default AnswerCharacters;
+export default AvailableCharacters;
 
 const Content = styled.View`
   flex-direction: row;

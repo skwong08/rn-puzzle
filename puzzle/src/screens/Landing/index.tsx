@@ -25,8 +25,8 @@ const LandingScreen: FC<IProps> = () => {
     navigate(ALL_MOBILE_ROUTES.MAIN.PUZZLE);
   };
 
-  const goLeadersBoard = () => {
-    navigate(ALL_MOBILE_ROUTES.MAIN.LEADERSBOARD);
+  const goLeaderboard = () => {
+    navigate(ALL_MOBILE_ROUTES.MAIN.LEADERBOARD);
   };
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const LandingScreen: FC<IProps> = () => {
         </CategoryButton>
       </Buttons>
       <Button onPress={startGame}>Start Playing</Button>
-      <Button onPress={goLeadersBoard} transparent>
+      <Button onPress={goLeaderboard} transparent>
         Leaders board
       </Button>
     </Container>

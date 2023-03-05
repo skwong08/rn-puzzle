@@ -1,8 +1,10 @@
 import React, {FC, useCallback, useEffect, useMemo} from 'react';
 import styled from 'styled-components/native';
 
-import Button from '../../components/Button';
+import {resultService} from '../../core/result';
 import {puzzleService, usePuzzle} from '../../core/puzzle';
+
+import Button from '../../components/Button';
 import {
   ALL_MOBILE_ROUTES,
   MobileRoutesParamsList,
@@ -10,13 +12,13 @@ import {
 import {navigate} from '../../navigation/NavigationUtil';
 import {Container, DescriptionText, HeaderText} from '../../styles';
 
-import AvailableCharacters from './AvailableCharacters';
-import AnswerCharacters from './AnswerCharacters';
+import AvailableCharacters from './Views/AvailableCharacters';
+import AnswerCharacters from './Views/AnswerCharacters';
 
 interface IProps extends MobileRoutesParamsList {}
 
 const PuzzleScreen: FC<IProps> = () => {
-  const {currentQuestion, wordPuzzleList} = usePuzzle();
+  const {correct, currentQuestion, wordPuzzleList} = usePuzzle();
 
   const shuffleWordsOptions = (item: string) => {
     var a = item.split(''),
@@ -42,6 +44,7 @@ const PuzzleScreen: FC<IProps> = () => {
     if (currentQuestion < wordPuzzleList.length - 1) {
       puzzleService.nextQuestion(currentQuestion + 1);
     } else {
+      resultService.setResult(correct * 10);
       navigate(ALL_MOBILE_ROUTES.MAIN.RESULT);
     }
   };
