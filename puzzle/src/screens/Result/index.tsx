@@ -3,8 +3,8 @@ import {CommonActions} from '@react-navigation/native';
 import styled from 'styled-components/native';
 
 import Button from '../../components/Button';
-import {navigate, navigationRef} from '../../navigation/NavigationUtil';
 import {ALL_MOBILE_ROUTES} from '../../navigation/NavigationRouter';
+import {navigate, navigationRef} from '../../navigation/NavigationUtil';
 import {Container, HeaderText, PointsText} from '../../styles';
 
 interface IProps {

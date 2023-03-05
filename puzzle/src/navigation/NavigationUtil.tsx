@@ -1,4 +1,5 @@
 import {createNavigationContainerRef} from '@react-navigation/native';
+
 import {ALL_MOBILE_ROUTES, MobileRoutesParamsList} from './NavigationRouter';
 
 export const navigationRef = createNavigationContainerRef<
