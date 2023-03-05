@@ -1,10 +1,11 @@
 import React, {FC, useEffect} from 'react';
 import styled from 'styled-components/native';
 
-import Button from '../../components/Button';
-import CategoryButton from '../../components/OptionButton';
 import {puzzleService, usePuzzle} from '../../core/puzzle';
 import {ECategory} from '../../core/puzzle/service';
+
+import Button from '../../components/Button';
+import CategoryButton from '../../components/OptionButton';
 import {ALL_MOBILE_ROUTES, navigate} from '../../navigation/NavigationUtil';
 import {Container, HeaderText} from '../../styles';
 

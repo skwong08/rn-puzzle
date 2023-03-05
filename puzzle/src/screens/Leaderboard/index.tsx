@@ -1,6 +1,5 @@
 import React, {FC, useCallback, useEffect} from 'react';
 import styled from 'styled-components/native';
-
 import {FlatList, Share, Alert} from 'react-native';
 
 import {resultService, useResult} from '../../core/result';
