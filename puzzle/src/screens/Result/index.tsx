@@ -2,23 +2,21 @@ import React, {FC} from 'react';
 import {CommonActions} from '@react-navigation/native';
 import styled from 'styled-components/native';
 
+import {puzzleService, usePuzzle} from '../../core/puzzle';
 import Button from '../../components/Button';
 import {ALL_MOBILE_ROUTES} from '../../navigation/NavigationRouter';
-import {navigate, navigationRef} from '../../navigation/NavigationUtil';
+import {navigationRef} from '../../navigation/NavigationUtil';
 import {Container, HeaderText, PointsText} from '../../styles';
 
-interface IProps {
-  corrects: number;
-}
+interface IProps {}
 
-const ResultScreen: FC<IProps> = props => {
-  const {corrects = 3} = props;
-
-  const tryAgain = () => {
-    navigate(ALL_MOBILE_ROUTES.MAIN.PUZZLE);
-  };
+const ResultScreen: FC<IProps> = () => {
+  const {correct} = usePuzzle();
+  console.log('correct = ', correct);
 
   const finish = () => {
+    puzzleService.reset();
+
     navigationRef.dispatch(
       CommonActions.reset({
         index: 0,
@@ -30,10 +28,10 @@ const ResultScreen: FC<IProps> = props => {
   return (
     <Container>
       <ResultContainer>
-        {corrects > 0 ? (
+        {correct > 0 ? (
           <>
             <HeaderText>Congratulations!</HeaderText>
-            <PointsText>You earn {corrects * 10} points!</PointsText>
+            <PointsText>You earn {correct * 10} points!</PointsText>
           </>
         ) : (
           <>
@@ -42,10 +40,7 @@ const ResultScreen: FC<IProps> = props => {
           </>
         )}
       </ResultContainer>
-      {!(corrects > 0) && <Button onPress={tryAgain}>Try Again</Button>}
-      <Button onPress={finish} transparent={!(corrects > 0)}>
-        Back to Home
-      </Button>
+      <Button onPress={finish}>Back to Home</Button>
     </Container>
   );
 };

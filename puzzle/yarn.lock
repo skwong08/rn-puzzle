@@ -6348,6 +6348,11 @@
   "resolved" "https://registry.npmjs.org/react-refresh/-/react-refresh-0.4.3.tgz"
   "version" "0.4.3"
 
+"react-reservice@^1.0.2":
+  "integrity" "sha512-SaGDCWru3dttbTVxO6Pj4vHBRFTXZjzQ52l7CfgyeFQ3yNxbFVEUkUN9D9jKa1GhS4Ij5SFXCr32kjdnfyrGPQ=="
+  "resolved" "https://registry.npmjs.org/react-reservice/-/react-reservice-1.0.2.tgz"
+  "version" "1.0.2"
+
 "react-shallow-renderer@^16.13.1":
   "integrity" "sha512-oScf2FqQ9LFVQgA73vr86xl2NaOIX73rh+YFqcOp68CWj56tSfgtGKrEbyhCj0rSijyG9M1CYprTh39fBi5hzA=="
   "resolved" "https://registry.npmjs.org/react-shallow-renderer/-/react-shallow-renderer-16.15.0.tgz"
@@ -6374,7 +6379,7 @@
     "raf" "^3.1.0"
     "tween-functions" "^1.0.1"
 
-"react@*", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@>= 16.8.0", "react@>=16.0.0-alpha.3", "react@>=16.4.1", "react@>=17.0.0", "react@~17.0.2", "react@16 || 17", "react@17.0.2":
+"react@*", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@>= 16.8.0", "react@>=16", "react@>=16.0.0-alpha.3", "react@>=16.4.1", "react@>=17.0.0", "react@~17.0.2", "react@16 || 17", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"

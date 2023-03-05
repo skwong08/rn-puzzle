@@ -1,28 +1,27 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import styled from 'styled-components/native';
 
 import Button from '../../components/Button';
 import CategoryButton from '../../components/OptionButton';
+import {puzzleService, usePuzzle} from '../../core/puzzle';
+import {ECategory} from '../../core/puzzle/service';
 import {ALL_MOBILE_ROUTES, navigate} from '../../navigation/NavigationUtil';
 import {Container, HeaderText} from '../../styles';
 
 interface IProps {}
 
-enum ECategory {
-  NOT_SELECTED = 'NOT_SELECTED',
-  CITIES = 'CITIES',
-  FOOD = 'FOOD',
-  ANIMALS = 'ANIMALS',
-}
-
 const LandingScreen: FC<IProps> = () => {
-  const [category, setCategory] = useState<ECategory>(ECategory.NOT_SELECTED);
+  const {selectedCategory} = usePuzzle();
 
-  const selectedCategory = (c: ECategory) => {
-    setCategory(c);
+  const selectCategory = (c: ECategory) => {
+    puzzleService.setCategory(c);
   };
 
   const startGame = () => {
+    if (selectedCategory === ECategory.NOT_SELECTED) {
+      return;
+    }
+
     navigate(ALL_MOBILE_ROUTES.MAIN.PUZZLE);
   };
 
@@ -30,23 +29,27 @@ const LandingScreen: FC<IProps> = () => {
     navigate(ALL_MOBILE_ROUTES.MAIN.LEADERSBOARD);
   };
 
+  useEffect(() => {
+    puzzleService.reset();
+  }, []);
+
   return (
     <Container>
       <HeaderText>Word Puzzle</HeaderText>
       <Buttons>
         <CategoryButton
-          onPress={() => selectedCategory(ECategory.CITIES)}
-          selected={category === ECategory.CITIES}>
+          onPress={() => selectCategory(ECategory.CITIES)}
+          selected={selectedCategory === ECategory.CITIES}>
           Cities
         </CategoryButton>
         <CategoryButton
-          onPress={() => selectedCategory(ECategory.FOOD)}
-          selected={category === ECategory.FOOD}>
+          onPress={() => selectCategory(ECategory.FOOD)}
+          selected={selectedCategory === ECategory.FOOD}>
           Food
         </CategoryButton>
         <CategoryButton
-          onPress={() => selectedCategory(ECategory.ANIMALS)}
-          selected={category === ECategory.ANIMALS}>
+          onPress={() => selectCategory(ECategory.ANIMALS)}
+          selected={selectedCategory === ECategory.ANIMALS}>
           Animals
         </CategoryButton>
       </Buttons>

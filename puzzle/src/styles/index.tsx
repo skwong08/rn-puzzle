@@ -19,6 +19,14 @@ export const HeaderText = styled.Text`
   align-self: center;
 `;
 
+export const DescriptionText = styled.Text`
+  color: black;
+  font-size: 25px;
+
+  margin-vertical: 20px;
+  align-self: center;
+`;
+
 export const PointsText = styled.Text`
   color: gray;
   font-size: 40px;

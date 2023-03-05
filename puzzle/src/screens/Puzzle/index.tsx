@@ -1,62 +1,94 @@
-import React, {FC, useCallback, useEffect, useMemo, useState} from 'react';
+import React, {FC, useCallback, useEffect, useMemo} from 'react';
+import styled from 'styled-components/native';
 
 import Button from '../../components/Button';
-import {ALL_MOBILE_ROUTES} from '../../navigation/NavigationRouter';
+import {puzzleService, usePuzzle} from '../../core/puzzle';
+import {
+  ALL_MOBILE_ROUTES,
+  MobileRoutesParamsList,
+} from '../../navigation/NavigationRouter';
 import {navigate} from '../../navigation/NavigationUtil';
-import {Container, HeaderText} from '../../styles';
+import {Container, DescriptionText, HeaderText} from '../../styles';
 
-import {PuzzleObject, AnimalTypes} from './PuzzleTypes';
 import AvailableCharacters from './AvailableCharacters';
+import AnswerCharacters from './AnswerCharacters';
 
-interface IProps {}
+interface IProps extends MobileRoutesParamsList {}
 
 const PuzzleScreen: FC<IProps> = () => {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [list, setList] = useState<PuzzleObject[]>([]);
+  const {currentQuestion, wordPuzzleList} = usePuzzle();
+
+  const shuffleWordsOptions = (item: string) => {
+    var a = item.split(''),
+      n = a.length;
+
+    for (var i = n - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i];
+      a[i] = a[j];
+      a[j] = tmp;
+    }
+
+    return a;
+  };
 
   const endGame = () => {
-    if (list.length === 0) {
+    if (wordPuzzleList.length === 0) {
       return;
     }
 
-    const index = currentQuestion;
+    puzzleService.checkAnswer(wordPuzzleList[currentQuestion].answer);
 
-    if (index <= list.length) {
-      setCurrentQuestion(index + 1);
+    if (currentQuestion < wordPuzzleList.length - 1) {
+      puzzleService.nextQuestion(currentQuestion + 1);
     } else {
       navigate(ALL_MOBILE_ROUTES.MAIN.RESULT);
     }
   };
 
+  const randomWordDidPress = useCallback(
+    (answer: string, index: number, isFirstRow: boolean) => {
+      if (isFirstRow) {
+        puzzleService.setFirstRowIndex(index);
+      } else {
+        puzzleService.setSecondRowIndex(index);
+      }
+
+      puzzleService.setUserAnswer(answer);
+    },
+    [],
+  );
+
   const currentWordPuzzle = useMemo(() => {
-    if (list.length === 0) {
+    if (
+      wordPuzzleList.length === 0 ||
+      currentQuestion >= wordPuzzleList.length
+    ) {
       return;
     }
 
-    const answer = list[currentQuestion].answer;
-    return <AvailableCharacters answer={answer} />;
-  }, [list, currentQuestion]);
+    const answer = wordPuzzleList[currentQuestion].answer;
+    const description = wordPuzzleList[currentQuestion].description;
 
-  const shufflePuzzleList = useCallback(() => {
-    const wordPuzzleList: PuzzleObject[] = [...AnimalTypes];
+    const randomText = shuffleWordsOptions(answer);
 
-    if (wordPuzzleList.length === 0) {
-      return;
-    }
-
-    for (let i = wordPuzzleList.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const temp = wordPuzzleList[i];
-      wordPuzzleList[i] = wordPuzzleList[j];
-      wordPuzzleList[j] = temp;
-    }
-
-    setList(wordPuzzleList);
-  }, []);
+    return (
+      <AnswerHintSection>
+        <AnswerHintSection>
+          <AnswerCharacters numberOfWords={answer.length} />
+          <DescriptionText>{description}</DescriptionText>
+        </AnswerHintSection>
+        <AvailableCharacters
+          randomText={randomText}
+          onPress={randomWordDidPress}
+        />
+      </AnswerHintSection>
+    );
+  }, [wordPuzzleList, currentQuestion, randomWordDidPress]);
 
   useEffect(() => {
-    shufflePuzzleList();
-  }, [shufflePuzzleList]);
+    puzzleService.init();
+  }, []);
 
   return (
     <Container>
@@ -68,3 +100,8 @@ const PuzzleScreen: FC<IProps> = () => {
 };
 
 export default PuzzleScreen;
+
+const AnswerHintSection = styled.View`
+  flex: 1;
+  margin-bottom: 20px;
+`;

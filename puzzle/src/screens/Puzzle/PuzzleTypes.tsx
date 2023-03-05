@@ -10,7 +10,7 @@ export const CityTypes: PuzzleObject[] = [
   },
   {
     answer: 'MARINABAY',
-    description: 'Mythical national icon, famous landmark of the Singapore.',
+    description: 'Mythical national icon, famous landmark of Singapore.',
   },
   {
     answer: 'SENTOSA',
@@ -19,7 +19,7 @@ export const CityTypes: PuzzleObject[] = [
   },
   {
     answer: 'CLARKEQUAY',
-    description: 'Most happening nightlife place in the Singapore.',
+    description: 'Most happening nightlife place in Singapore.',
   },
   {
     answer: 'ORCHARD',
